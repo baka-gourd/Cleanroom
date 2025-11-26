@@ -67,3 +67,9 @@ jobs:
           gzip: false
           files: |
               ./installer/*-installer.jar
+
+      - name: Trigger download server update
+        run: |
+          curl -X POST 'http://download.cleanroommc.com/api/webhook' \
+            --header 'Content-Type: application/json' \
+            --data "{\"secret\":\"${{ secrets.DOWNLOAD_UPDATE_TOKEN }}\",\"count\":10}"
